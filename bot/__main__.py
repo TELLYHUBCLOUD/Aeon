@@ -62,7 +62,7 @@ async def stats(_, message):
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
     cpuUsage = cpu_percent(interval=0.5)
-    limit_mapping = {
+    limit_mapping = <blockquote>{
         'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
         'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
         'Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
@@ -71,15 +71,15 @@ async def stats(_, message):
         'Clone'    : config_dict.get('CLONE_LIMIT',    '∞'),
         'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
         'User task': config_dict.get('USER_MAX_TASKS', '∞')}
-    system_info = f'<code>• Bot uptime :</code> {currentTime}\n'\
+    system_info = f'<blockquote><code>• Bot uptime :</code> {currentTime}\n'\
         f'<code>• Sys uptime :</code> {osUptime}\n'\
         f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
         f'<code>• RAM usage  :</code> {memory.percent}%\n'\
         f'<code>• Disk usage :</code> {disk}%\n'\
         f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>• Total space:</code> {get_readable_file_size(total)}\n\n'
+        f'<code>• Total space:</code> {get_readable_file_size(total)}</blockquote>\n\n'
             
-    limitations = '<b>LIMITATIONS</b>\n\n'
+    limitations = '<b>LIMITATIONS</b></blockquote>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
@@ -133,7 +133,7 @@ async def start(client, message):
 
 
 async def restart(client, message):
-    restart_message = await sendMessage(message, 'Restarting...')
+    restart_message = await sendMessage(message, '<blockquote>Restarting...</blockquote>')
     if scheduler.running:
         scheduler.shutdown(wait=False)
     for interval in [QbInterval, Interval]:
@@ -150,7 +150,7 @@ async def restart(client, message):
 
 async def ping(_, message):
     start_time = int(round(time() * 1000))
-    reply = await sendMessage(message, 'Starting ping...')
+    reply = await sendMessage(message, '<blockquote>Starting ping...</blockquote>')
     end_time = int(round(time() * 1000))
     value=(end_time - start_time)
     await editMessage(reply, f'{value} ms.')
@@ -217,7 +217,7 @@ async def restart_notification():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='Restarted Successfully!')
+            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='<blockquote>Restarted Successfully!</blockquote>')
         except Exception:
             pass
         await aioremove(".restartmsg")
