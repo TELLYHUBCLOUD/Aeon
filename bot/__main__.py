@@ -128,7 +128,7 @@ async def start(client, message):
         start_string = f'<blockquote>This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.\n<b>Type {help_command} to get a list of available commands</b></blockquote>'
         await sendMessage(message, start_string, photo='Random')
     else:
-        await sendMessage(message, 'You are not a authorized user!', photo='Random')
+        await sendMessage(message, 'You are not a authorized user!/n Yᴏᴜ Cᴀɴ Usᴇ Mᴇ ᴀᴛ /n <a href="https://t.me/TELLYCLOUD_Bots"><b>☬𝐓𝐄𝐋𝐋𝐘𝐂𝐋𝐎𝐔𝐃 𝐁𝐎𝐓𝐒™☬</b></a> ', photo='Random')
     await DbManager().update_pm_users(message.from_user.id)
 
 
