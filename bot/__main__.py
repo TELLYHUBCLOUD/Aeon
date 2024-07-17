@@ -71,15 +71,15 @@ async def stats(_, message):
         'Clone'    : config_dict.get('CLONE_LIMIT',    '∞'),
         'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
         'User task': config_dict.get('USER_MAX_TASKS', '∞')}
-    system_info = f'<code>• Bot uptime :</code> {currentTime}\n'\
+    system_info = f'<blockquote><code>• Bot uptime :</code> {currentTime}\n'\
         f'<code>• Sys uptime :</code> {osUptime}\n'\
         f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
         f'<code>• RAM usage  :</code> {memory.percent}%\n'\
         f'<code>• Disk usage :</code> {disk}%\n'\
         f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>• Total space:</code> {get_readable_file_size(total)}\n\n'
+        f'<code>• Total space:</code> {get_readable_file_size(total)}</blockquote>\n\n'
             
-    limitations = '<b>LIMITATIONS</b>\n\n'
+    limitations = '<blockquote><b>LIMITATIONS</b></blockquote>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
@@ -125,15 +125,15 @@ async def start(client, message):
         return await sendMessage(message, msg)
     elif await CustomFilters.authorized(client, message):
         help_command = f"/{BotCommands.HelpCommand}"
-        start_string = f'This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.\n<b>Type {help_command} to get a list of available commands</b>'
+        start_string = f'<blockquote>This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.\n<b>Type {help_command} to get a list of available commands</b></blockquote>'
         await sendMessage(message, start_string, photo='Random')
     else:
-        await sendMessage(message, 'You are not a authorized user!', photo='Random')
+        await sendMessage(message, 'You are not a authorized user!\n Yᴏᴜ Cᴀɴ Usᴇ Mᴇ ᴀᴛ \n <a href="https://t.me/TELLYCLOUD_Bots"><b>☬𝐓𝐄𝐋𝐋𝐘𝐂𝐋𝐎𝐔𝐃 𝐁𝐎𝐓𝐒™☬</b></a> ', photo='Random')
     await DbManager().update_pm_users(message.from_user.id)
 
 
 async def restart(client, message):
-    restart_message = await sendMessage(message, 'Restarting...')
+    restart_message = await sendMessage(message, '<blockquote>Restarting...</blockquote>')
     if scheduler.running:
         scheduler.shutdown(wait=False)
     for interval in [QbInterval, Interval]:
@@ -150,7 +150,7 @@ async def restart(client, message):
 
 async def ping(_, message):
     start_time = int(round(time() * 1000))
-    reply = await sendMessage(message, 'Starting ping...')
+    reply = await sendMessage(message, '<blockquote>Starting ping...</blockquote>')
     end_time = int(round(time() * 1000))
     value=(end_time - start_time)
     await editMessage(reply, f'{value} ms.')
@@ -217,7 +217,7 @@ async def restart_notification():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='Restarted Successfully!')
+            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='<blockquote>Restarted Successfully!</blockquote>')
         except Exception:
             pass
         await aioremove(".restartmsg")
