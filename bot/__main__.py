@@ -63,7 +63,7 @@ async def stats(_, message):
     osUptime = get_readable_time(time() - boot_time())
     cpuUsage = cpu_percent(interval=0.5)
     limit_mapping = {
-        <blockquote>'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
+        'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
         'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
         'Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
         'Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
@@ -79,7 +79,7 @@ async def stats(_, message):
         f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
         f'<code>• Total space:</code> {get_readable_file_size(total)}</blockquote>\n\n'
             
-    limitations = '<b>LIMITATIONS</b></blockquote>\n\n'
+    limitations = '<blockquote><b>LIMITATIONS</b></blockquote>\n\n'
     
     for k, v in limit_mapping.items():
         if v == '':
