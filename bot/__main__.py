@@ -57,23 +57,20 @@ else:
 
 @new_thread
 async def stats(_, message):
-    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEYonplzwrczhVu3I6HqPBzro3L2JU6YAACvAUAAj-VzAoTSKpoG9FPRjQE")
-    await asyncio.sleep(2)
-    await sticker_message.delete()
     total, used, free, disk = disk_usage('/')
     memory = virtual_memory()
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
     cpuUsage = cpu_percent(interval=0.5)
     limit_mapping = {
-        '🧲 Tᴏʀʀᴇɴᴛ'     : config_dict.get('TORRENT_LIMIT',  '∞'),
-        '🟢 Gᴅʀɪᴠᴇ'      : config_dict.get('GDRIVE_LIMIT',   '∞'),
-        '🔴 Yᴛᴅʟᴘ'       : config_dict.get('YTDLP_LIMIT',    '∞'),
-        '🔗 Dɪʀᴇᴄᴛ'      : config_dict.get('DIRECT_LIMIT',   '∞'),
-        '🚀 Lᴇᴇᴄʜ'       : config_dict.get('LEECH_LIMIT',    '∞'),
-        '⚡️ Cʟᴏɴᴇ'       : config_dict.get('CLONE_LIMIT',    '∞'),
-        'Ⓜ️ Mᴇɢᴀ'        : config_dict.get('MEGA_LIMIT',     '∞'),
-        '👤 Usᴇʀ ᴛᴀsᴋ'   : config_dict.get('USER_MAX_TASKS', '∞')}
+        'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
+        'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
+        'Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
+        'Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
+        'Leech'    : config_dict.get('LEECH_LIMIT',    '∞'),
+        'Clone'    : config_dict.get('CLONE_LIMIT',    '∞'),
+        'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
+        'User task': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<code>• Bot uptime :</code> {currentTime}\n'\
         f'<code>• Sys uptime :</code> {osUptime}\n'\
         f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
@@ -100,11 +97,6 @@ async def stats(_, message):
 
 @new_thread
 async def start(client, message):
-    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEXyPRledQ6luKt1QABSPMPi2s4rgH3xMUAAmkdAALpI4hJ8xCGgSybQv8zBA")
-    await asyncio.sleep(2)
-    await sticker_message.delete()
-    buttons = ButtonMaker()
-    reply_markup = buttons.build_menu(2)
     if len(message.command) > 1 and message.command[1] == "private":
         await deleteMessage(message)
     elif len(message.command) > 1 and len(message.command[1]) == 36:
