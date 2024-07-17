@@ -62,8 +62,8 @@ async def stats(_, message):
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
     cpuUsage = cpu_percent(interval=0.5)
-    limit_mapping = <blockquote>{
-        'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
+    limit_mapping = {
+        <blockquote>'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
         'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
         'Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
         'Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
