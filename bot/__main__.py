@@ -10,6 +10,7 @@ from aiofiles.os import path as aiopath, remove as aioremove
 from aiofiles import open as aiopen
 from psutil import disk_usage, cpu_percent, virtual_memory, boot_time
 from pyrogram.handlers import MessageHandler, CallbackQueryHandler
+import asyncio
 from pyrogram.filters import command, regex
 
 from bot import bot, config_dict, user_data, botStartTime, LOGGER, Interval, DATABASE_URL, QbInterval, scheduler, bot_name
@@ -57,6 +58,9 @@ else:
 
 @new_thread
 async def stats(_, message):
+    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEYonplzwrczhVu3I6HqPBzro3L2JU6YAACvAUAAj-VzAoTSKpoG9FPRjQE")
+    await asyncio.sleep(2)
+    await sticker_message.delete()
     total, used, free, disk = disk_usage('/')
     memory = virtual_memory()
     currentTime = get_readable_time(time() - botStartTime)
@@ -97,6 +101,9 @@ async def stats(_, message):
 
 @new_thread
 async def start(client, message):
+    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEXyPRledQ6luKt1QABSPMPi2s4rgH3xMUAAmkdAALpI4hJ8xCGgSybQv8zBA")
+    await asyncio.sleep(2)
+    await sticker_message.delete()
     if len(message.command) > 1 and message.command[1] == "private":
         await deleteMessage(message)
     elif len(message.command) > 1 and len(message.command[1]) == 36:
@@ -133,6 +140,9 @@ async def start(client, message):
 
 
 async def restart(client, message):
+    sticker_message = await message.reply_sticker("CAACAgUAAxkBAAEXrSRlbwYlArKGw0lVGUGHquKMqbu3fQACLggAAmCIwVXm28BgWp1jmzME")
+    await asyncio.sleep(2)
+    await sticker_message.delete()
     restart_message = await sendMessage(message, '<blockquote>Restarting...</blockquote>')
     if scheduler.running:
         scheduler.shutdown(wait=False)
