@@ -70,11 +70,11 @@ class MirrorLeechListener:
 
     async def onDownloadStart(self):
         if config_dict['LEECH_LOG_ID']:
-            msg = '<b>Task Started</b>\n\n'
+            msg = '<blockquote><b>Task Started</b>\n\n'
             msg += f'<b>• Task by:</b> {self.tag}\n'
             msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>'
             self.linkslogmsg = await sendCustomMsg(config_dict['LEECH_LOG_ID'], msg)
-        self.botpmmsg = await sendCustomMsg(self.message.from_user.id, '<b>Task started</b>')
+        self.botpmmsg = await sendCustomMsg(self.message.from_user.id, '<b>Task started</blockquote></b>')
 
     async def onDownloadComplete(self):
         multi_links = False
@@ -333,8 +333,8 @@ class MirrorLeechListener:
     async def onUploadComplete(self, link, size, files, folders, mime_type, name, rclonePath=''):
         user_id = self.message.from_user.id
         name, _ = await process_file(name, user_id, isMirror=not self.isLeech)
-        msg = f'{escape(name)}\n\n'
-        msg += f'<blockquote><b>• Size: </b>{get_readable_file_size(size)}\n'
+        msg = f'<blockquote>{escape(name)}\n\n'
+        msg += f'<b>• Size: </b>{get_readable_file_size(size)}\n'
         msg += f'<b>• Elapsed: </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
         LOGGER.info(f'Task Done: {name}')
         buttons = ButtonMaker()
@@ -355,7 +355,7 @@ class MirrorLeechListener:
             else:
                 attachmsg = True
                 fmsg, totalmsg = '\n\n', ''
-                lmsg = '<b>Files have been sent. Access them via the provided links.</b>'
+                lmsg = '<blockquote><b>Files have been sent. Access them via the provided links.</b></blockquote>'
                 for index, (link, name) in enumerate(files.items(), start=1):
                     fmsg += f"{index}. <a href='{link}'>{name}</a>\n"
                     totalmsg = (msg + lmsg + fmsg) if attachmsg else fmsg
@@ -374,7 +374,7 @@ class MirrorLeechListener:
                 await sendMessage(self.botpmmsg, msg + lmsg + fmsg)
                 await deleteMessage(self.botpmmsg)
                 if self.isSuperGroup:
-                    await sendMessage(self.message, f'{msg}<b>Files has been sent to your inbox</b>', inboxButton.column(1))
+                    await sendMessage(self.message, f'<blockquote>{msg}<b>Files has been sent to your inbox</b></blockquote>', inboxButton.column(1))
                 else:
                     await deleteMessage(self.botpmmsg)
             if self.seed:
@@ -387,7 +387,7 @@ class MirrorLeechListener:
                 return
         else:
             if mime_type == "Folder":
-                msg += f'<b>• Total files: </b>{files}\n'
+                msg += f'<blockquote><b>• Total files: </b>{files}</blockquote>\n'
             if link:
                 buttons.url('Cloud link', link)
                 INDEX_URL = self.index_link if self.drive_id else config_dict['INDEX_URL']
@@ -455,7 +455,7 @@ class MirrorLeechListener:
                 self.sameDir['tasks'].remove(self.uid)
                 self.sameDir['total'] -= 1
         msg = f'Hey, {self.tag}!\n'
-        msg += 'Your download has been stopped!\n\n'
+        msg += '<blockquote>Your download has been stopped!</blockquote>\n\n'
         msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
         msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg, button)
@@ -495,8 +495,8 @@ class MirrorLeechListener:
             if self.uid in download_dict.keys():
                 del download_dict[self.uid]
             count = len(download_dict)
-        msg = f'Hey, {self.tag}!\n'
-        msg += 'Your upload has been stopped!\n\n'
+        msg = f'<blockquote>Hey, {self.tag}!\n'
+        msg += 'Your upload has been stopped!</blockquote>\n\n'
         msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
         msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg)
