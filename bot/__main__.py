@@ -63,13 +63,13 @@ async def stats(_, message):
     osUptime = get_readable_time(time() - boot_time())
     cpuUsage = cpu_percent(interval=0.5)
     limit_mapping = {
-        'Torrent'  : config_dict.get('TORRENT_LIMIT',  '∞'),
-        'Gdrive'   : config_dict.get('GDRIVE_LIMIT',   '∞'),
-        'Ytdlp'    : config_dict.get('YTDLP_LIMIT',    '∞'),
-        'Direct'   : config_dict.get('DIRECT_LIMIT',   '∞'),
-        'Leech'    : config_dict.get('LEECH_LIMIT',    '∞'),
-        'Clone'    : config_dict.get('CLONE_LIMIT',    '∞'),
-        'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
+        'Torrent'   : config_dict.get('TORRENT_LIMIT',  '∞'),
+        'Gdrive'    : config_dict.get('GDRIVE_LIMIT',   '∞'),
+        'Ytdlp'     : config_dict.get('YTDLP_LIMIT',    '∞'),
+        'Direct'    : config_dict.get('DIRECT_LIMIT',   '∞'),
+        'Leech'     : config_dict.get('LEECH_LIMIT',    '∞'),
+        'Clone'     : config_dict.get('CLONE_LIMIT',    '∞'),
+        'Mega'      : config_dict.get('MEGA_LIMIT',     '∞'),
         'User task': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<blockquote><code>• Bot uptime :</code> {currentTime}\n'\
         f'<code>🤖 Sys uptime :</code> {osUptime}\n'\
