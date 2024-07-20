@@ -454,8 +454,8 @@ class MirrorLeechListener:
             if self.sameDir and self.uid in self.sameDir['tasks']:
                 self.sameDir['tasks'].remove(self.uid)
                 self.sameDir['total'] -= 1
-        msg = f'Hey, {self.tag}!\n'
-        msg += '<blockquote>Your download has been stopped!</blockquote>\n\n'
+        msg = f'<blockquote>Hey, {self.tag}!\n'
+        msg += 'Your download has been stopped!</blockquote>\n\n'
         msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
         msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg, button)
