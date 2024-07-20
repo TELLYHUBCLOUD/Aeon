@@ -72,12 +72,12 @@ async def stats(_, message):
         'Mega'     : config_dict.get('MEGA_LIMIT',     '∞'),
         'User task': config_dict.get('USER_MAX_TASKS', '∞')}
     system_info = f'<blockquote><code>• Bot uptime :</code> {currentTime}\n'\
-        f'<code>• Sys uptime :</code> {osUptime}\n'\
-        f'<code>• CPU usage  :</code> {cpuUsage}%\n'\
-        f'<code>• RAM usage  :</code> {memory.percent}%\n'\
-        f'<code>• Disk usage :</code> {disk}%\n'\
-        f'<code>• Free space :</code> {get_readable_file_size(free)}\n'\
-        f'<code>• Total space:</code> {get_readable_file_size(total)}</blockquote>\n\n'
+        f'<code>🤖 Sys uptime :</code> {osUptime}\n'\
+        f'<code>🖥️ CPU usage  :</code> {cpuUsage}%\n'\
+        f'<code>🧨 RAM usage  :</code> {memory.percent}%\n'\
+        f'<code>💿 Disk usage :</code> {disk}%\n'\
+        f'<code>🪫 Free space :</code> {get_readable_file_size(free)}\n'\
+        f'<code>💯 Total space:</code> {get_readable_file_size(total)}</blockquote>\n\n'
             
     limitations = '<blockquote><b>LIMITATIONS</b></blockquote>\n\n'
     
@@ -217,7 +217,7 @@ async def restart_notification():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='<blockquote>Restarted Successfully!</blockquote>')
+            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='<blockquote> ▂▃▅▇█▓▒░ BOT STARTED ░▒▓█▇▅▃▂</blockquote>')
         except Exception:
             pass
         await aioremove(".restartmsg")
