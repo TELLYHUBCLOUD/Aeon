@@ -17,7 +17,7 @@ async def mirror_status(_, message):
     if count == 0:
         currentTime = get_readable_time(time() - botStartTime)
         free = get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)
-        msg = '<blockquote>◥꧁ད 𝐔𝐧𝐢𝐧𝐬𝐭𝐚𝐥𝐥 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦! 𝐚𝐧𝐝 𝐄𝐧𝐣𝐨𝐲 𝐟𝐨𝐫 𝐋𝐢𝐟𝐞!! ཌ꧂◤/<blockquote>\n'
+        msg = '<blockquote>◥꧁ད 𝐔𝐧𝐢𝐧𝐬𝐭𝐚𝐥𝐥 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦! 𝐚𝐧𝐝 𝐄𝐧𝐣𝐨𝐲 𝐟𝐨𝐫 𝐋𝐢𝐟𝐞!! ཌ꧂◤</blockquote>\n'
         msg += f"\n<blockquote><b>• Bot uptime</b>: {currentTime}"
         msg += f"\n<b>• Free disk space</b>: {free}</blockquote>"
 
