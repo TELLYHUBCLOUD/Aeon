@@ -1,4 +1,4 @@
-name: aptible
+name: deploy to aptible
 
 on:
   push:
