@@ -401,7 +401,7 @@ class MirrorLeechListener:
                 buttons = extra_btns(buttons)
                 button = buttons.column(2)
             elif rclonePath:
-                msg += f'<b><code>• Path            :<code> </b><code>{rclonePath}</code>\n'
+                msg += f'<b><blockquote><code>• Path            :<code> </b><code>{rclonePath}</code>\n'
                 button = None
                 buttons = extra_btns(buttons)
                 button = buttons.column(2)
