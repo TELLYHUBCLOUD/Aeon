@@ -71,8 +71,8 @@ class MirrorLeechListener:
     async def onDownloadStart(self):
         if config_dict['LEECH_LOG_ID']:
             msg = '<b>Task Started</b>\n\n'
-            msg += f'<b><blockquote>• Task by:</b> {self.tag}\n'
-            msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>'
+            msg += f'<b><blockquote><code>• Task by         :</code></b> {self.tag}\n'
+            msg += f'<b><code>• User ID         :</code> </b><code>{self.message.from_user.id}</code>'
             self.linkslogmsg = await sendCustomMsg(config_dict['LEECH_LOG_ID'], msg)
         self.botpmmsg = await sendCustomMsg(self.message.from_user.id, '<b>Task started</blockquote></b>')
 
@@ -334,7 +334,7 @@ class MirrorLeechListener:
         user_id = self.message.from_user.id
         name, _ = await process_file(name, user_id, isMirror=not self.isLeech)
         msg = f'<b>{escape(name)}</b>\n\n'
-        msg += f'<b><blockquote><code>• Size           :</code> </b>{get_readable_file_size(size)}\n'
+        msg += f'<b><blockquote><code>• Size            :</code> </b>{get_readable_file_size(size)}\n'
         msg += f'<b><code>• Elapsed         :</code> </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
         LOGGER.info(f'<code>Task Done         :</code> {name}')
         buttons = ButtonMaker()
@@ -346,7 +346,7 @@ class MirrorLeechListener:
                 msg += f'<b><code>• Total files     :</code> </b>{folders}\n'
             if mime_type != 0:
                 msg += f'<b><code>• Corrupted files :</code> </b>{mime_type}\n'
-            msg += f'<b><code>• User ID          :</code> </b><code>{self.message.from_user.id}</code>\n'
+            msg += f'<b><code>• User ID         :</code> </b><code>{self.message.from_user.id}</code>\n'
             msg += f'<b><code>• By              :</code> </b>{self.tag}</blockquote>\n\n'
             if not files:
                 if self.isPrivate:
