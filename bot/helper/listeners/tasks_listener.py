@@ -70,8 +70,8 @@ class MirrorLeechListener:
 
     async def onDownloadStart(self):
         if config_dict['LEECH_LOG_ID']:
-            msg = '<blockquote><b>Task Started</b>\n\n'
-            msg += f'<b>• Task by:</b> {self.tag}\n'
+            msg = '<b>Task Started</b>\n\n'
+            msg += f'<b><blockquote>• Task by:</b> {self.tag}\n'
             msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>'
             self.linkslogmsg = await sendCustomMsg(config_dict['LEECH_LOG_ID'], msg)
         self.botpmmsg = await sendCustomMsg(self.message.from_user.id, '<b>Task started</blockquote></b>')
@@ -333,21 +333,21 @@ class MirrorLeechListener:
     async def onUploadComplete(self, link, size, files, folders, mime_type, name, rclonePath=''):
         user_id = self.message.from_user.id
         name, _ = await process_file(name, user_id, isMirror=not self.isLeech)
-        msg = f'<blockquote>{escape(name)}\n\n'
-        msg += f'<b>• Size: </b>{get_readable_file_size(size)}\n'
-        msg += f'<b>• Elapsed: </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
-        LOGGER.info(f'Task Done: {name}')
+        msg = f'<b>{escape(name)}</b>\n\n'
+        msg += f'<b><blockquote><code>• Size           :</code> </b>{get_readable_file_size(size)}\n'
+        msg += f'<b><code>• Elapsed         :</code> </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
+        LOGGER.info(f'<code>Task Done         :</code> {name}')
         buttons = ButtonMaker()
         inboxButton = ButtonMaker()
         inboxButton.callback('View in inbox', f"aeon {user_id} private", 'header')
         inboxButton = extra_btns(inboxButton)
         if self.isLeech:
             if folders > 1:
-                msg += f'<b>• Total files: </b>{folders}\n'
+                msg += f'<b><code>• Total files     :</code> </b>{folders}\n'
             if mime_type != 0:
-                msg += f'<b>• Corrupted files: </b>{mime_type}\n'
-            msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>\n'
-            msg += f'<b>• By: </b>{self.tag}</blockquote>\n\n'
+                msg += f'<b><code>• Corrupted files :</code> </b>{mime_type}\n'
+            msg += f'<b><code>• User ID          :</code> </b><code>{self.message.from_user.id}</code>\n'
+            msg += f'<b><code>• By              :</code> </b>{self.tag}</blockquote>\n\n'
             if not files:
                 if self.isPrivate:
                     msg += '<b>Files have not been sent for an unspecified reason</b>'
@@ -387,7 +387,7 @@ class MirrorLeechListener:
                 return
         else:
             if mime_type == "Folder":
-                msg += f'<blockquote><b>• Total files: </b>{files}</blockquote>\n'
+                msg += f'<blockquote><b><code>• Total files     :</code> </b>{files}</blockquote>\n'
             if link:
                 buttons.url('Cloud link', link)
                 INDEX_URL = self.index_link if self.drive_id else config_dict['INDEX_URL']
@@ -401,12 +401,12 @@ class MirrorLeechListener:
                 buttons = extra_btns(buttons)
                 button = buttons.column(2)
             elif rclonePath:
-                msg += f'<b>• Path: </b><code>{rclonePath}</code>\n'
+                msg += f'<b><code>• Path            :<code> </b><code>{rclonePath}</code>\n'
                 button = None
                 buttons = extra_btns(buttons)
                 button = buttons.column(2)
-            msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code>\n'
-            msg += f'<b>• By: </b>{self.tag}</blockquote>\n\n'
+            msg += f'<b><code>• User ID         :</code> </b><code>{self.message.from_user.id}</code>\n'
+            msg += f'<b><code>• By              :</code> </b>{self.tag}</blockquote>\n\n'
 
             if config_dict['MIRROR_LOG_ID']:
                 await sendMultiMessage(config_dict['MIRROR_LOG_ID'], msg, button)
@@ -456,8 +456,8 @@ class MirrorLeechListener:
                 self.sameDir['total'] -= 1
         msg = f'<blockquote>Hey, {self.tag}!\n'
         msg += 'Your download has been stopped!</blockquote>\n\n'
-        msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
-        msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
+        msg += f'<blockquote><b><code>Reason            :</code></b> {escape(error)}\n'
+        msg += f'<b><code>Elapsed           :</code></b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg, button)
         await delete_links(self.message)
         if self.botpmmsg:
@@ -497,8 +497,8 @@ class MirrorLeechListener:
             count = len(download_dict)
         msg = f'<blockquote>Hey, {self.tag}!\n'
         msg += 'Your upload has been stopped!</blockquote>\n\n'
-        msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
-        msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
+        msg += f'<blockquote><b><code>Reason            :</code></b> {escape(error)}\n'
+        msg += f'<b><code>Elapsed           :</code></b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg)
         if self.linkslogmsg:
             await deleteMessage(self.linkslogmsg)
